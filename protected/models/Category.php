@@ -1,24 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "{{post}}".
+ * This is the model class for table "{{category}}".
  *
- * The followings are the available columns in table '{{post}}':
+ * The followings are the available columns in table '{{category}}':
  * @property integer $id
  * @property string $title
- * @property string $content
- * @property integer $category_id
  * @property integer $status
- * @property string $pub_date
  */
-class Post extends CActiveRecord
+class Category extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return '{{post}}';
+		return '{{category}}';
 	}
 
 	/**
@@ -29,12 +26,12 @@ class Post extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('title, content, category_id', 'required'),
-			array('category_id', 'numerical', 'integerOnly'=>true),
+			array('title', 'required'),
+			array('status', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>255),
-			array('title, content, category_id, status', 'safe'),
 			// The following rule is used by search().
-			array('id, title, content, category_id, status, pub_date', 'safe', 'on'=>'search'),
+			// @todo Please remove those attributes that should not be searched.
+			array('id, title, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,10 +54,7 @@ class Post extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'title' => 'Title',
-			'content' => 'Content',
-			'category_id' => 'Category',
 			'status' => 'Status',
-			'pub_date' => 'Pub Date',
 		);
 	}
 
@@ -84,10 +78,7 @@ class Post extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('title',$this->title,true);
-		$criteria->compare('content',$this->content,true);
-		$criteria->compare('category_id',$this->category_id);
 		$criteria->compare('status',$this->status);
-		$criteria->compare('pub_date',$this->pub_date,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -98,10 +89,20 @@ class Post extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Post the static model class
+	 * @return Category the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	/**
+	 * @return array
+	 */
+	public static function getCategoryList(){
+		$criteria = new CDbCriteria();
+		$criteria->addCondition('status = 1');
+		$category_list = Category::model()->findAll($criteria);
+		return CHtml::listData($category_list, 'id', 'title');;
 	}
 }

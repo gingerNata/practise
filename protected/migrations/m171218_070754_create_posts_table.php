@@ -6,7 +6,7 @@ class m171218_070754_create_posts_table extends CDbMigration
 	{
 		$this->createTable('tbl_post', array(
 			'id' => 'pk',
-			'title' => 'string',
+			'title' => 'c',
 			'content' => 'text',
 			'category_id' => 'integer',
 			'status' => 'boolean',

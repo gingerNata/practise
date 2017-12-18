@@ -447,6 +447,7 @@ class ECKEdit5
 
 		$args = "";
 		$ckeditorPath = $this->ckeditorPath();
+		$ckeditorPath = '/assets/2803d6b2/'; //todo find path to assets automatically
 
 		if (!empty($this->timestamp) && $this->timestamp != "%"."TIMESTAMP%") {
 			$args = '?t=' . $this->timestamp;

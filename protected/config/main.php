@@ -77,8 +77,6 @@ return array(
       'install'=>false,  // Whether to enable installer.
       'debug'=>false,
     ),
-    'role',
-    'registration',
 
   ),
 
@@ -98,6 +96,7 @@ return array(
       'itemChildTable'=>'authitemchild',
       'assignmentTable'=>'AuthAssignment',
       'rightsTable'=>'rights',
+      'defaultRoles' => array('guest'),
     ),
     // uncomment the following to enable URLs in path-format
 

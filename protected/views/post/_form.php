@@ -43,19 +43,41 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'category_id'); ?>
-		<?php echo $form->textField($model,'category_id', array('class' => "form-control")); ?>
+<!--		--><?php //echo $form->textField($model,'category_id', array('class' => "form-control")); ?>
+		<?php
+		$list = Category::getCategoryList();
+		echo $form->dropDownList($model, 'category_id', $list, array('class' => "form-control")); ?>
 		<?php echo $form->error($model,'category_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'status'); ?>
-		<?php echo $form->textField($model,'status', array('class' => "form-control")); ?>
+		<?php echo $form->dropDownList($model, 'status',
+			array('0' => "Do not publish", '1' => "Publish"),
+			array(
+				'class' => "form-control",
+				'options' => array(
+					1 => array('selected' => 'selected')
+				)
+			)); ?>
 		<?php echo $form->error($model,'status'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'pub_date'); ?>
-		<?php echo $form->textField($model,'pub_date', array('class' => "form-control")); ?>
+<!--		--><?php //echo $form->textField($model,'pub_date', array('class' => "form-control")); ?>
+		<?php
+		$this->widget('zii.widgets.jui.CJuiDatePicker',array(
+			'model' => $model,
+			'attribute' => 'pub_date',
+			'options'=>array(
+				'showAnim'=>'clip',//'slide','fold','slideDown','fadeIn','blind','bounce','clip','drop'
+			),
+			'htmlOptions'=>array(
+				'class' => "form-control",
+			),
+		));
+		?>
 		<?php echo $form->error($model,'pub_date'); ?>
 	</div>
 

@@ -16,16 +16,8 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Post #<?php echo $model->id; ?></h1>
-
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'title',
-		'content',
-		'category_id',
-		'status',
-		'pub_date',
-	),
-)); ?>
+<h1><?php echo $model->title ?></h1>
+<div class="container">
+	<p>Date of publication: <?php echo $model->pub_date ?></p>
+	<div><?php echo $model->title ?></div>
+</div>

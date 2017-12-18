@@ -4,12 +4,16 @@ class m171218_075851_create_category_table extends CDbMigration
 {
 	public function up()
 	{
+		$this->createTable('tbl_category', array(
+			'id' => 'pk',
+			'title' => 'varchar(255) NOT NULL',
+			'status' => 'boolean',
+		));
 	}
 
 	public function down()
 	{
-		echo "m171218_075851_create_category_table does not support migration down.\n";
-		return false;
+		$this->dropTable('tbl_category');
 	}
 
 	/*
